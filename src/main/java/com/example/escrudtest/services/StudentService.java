@@ -31,29 +31,27 @@ public class StudentService {
 
     public Optional<Student> update(Long id, Student student) {
         Optional<Student> updateStudent = studentRepository.findById(id);
-        if (updateStudent.isEmpty()) {
-            return Optional.empty();
-
-        } else {
+        if (updateStudent.isPresent()) {
             updateStudent.get().setName(student.getName());
             updateStudent.get().setSurname(student.getSurname());
             updateStudent.get().setWorking(student.isWorking());
 
             Student responseStudent = studentRepository.save(updateStudent.get());
             return Optional.of(responseStudent);
+        } else {
+            return Optional.empty();
         }
     }
 
     public Optional<Student> updateWorking(Long id, boolean isWorking) {
         Optional<Student> updateStudent = studentRepository.findById(id);
-        if (updateStudent.isEmpty()) {
-            return Optional.empty();
-
-        } else {
+        if (updateStudent.isPresent()) {
             updateStudent.get().setWorking(isWorking);
 
             Student responseStudent = studentRepository.save(updateStudent.get());
             return Optional.of(responseStudent);
+        } else {
+            return Optional.empty();
         }
     }
 

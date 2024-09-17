@@ -31,30 +31,30 @@ public class StudentController {
     @GetMapping("/read/{id}")
     public ResponseEntity<Student> readById(@PathVariable Long id){
         Optional<Student> studentOptional = studentService.readById(id);
-        if (studentOptional.isEmpty()){
-            return ResponseEntity.notFound().build();
-        } else {
+        if (studentOptional.isPresent()){
             return ResponseEntity.ok().body(studentOptional.get());
+        } else {
+            return ResponseEntity.notFound().build();
         }
     }
 
     @PutMapping("/change/{id}")
     public ResponseEntity<Student> update(@PathVariable Long id, @RequestBody Student student) {
         Optional<Student> studentOptional = studentService.update(id, student);
-        if (studentOptional.isEmpty()){
-            return ResponseEntity.notFound().build();
-        } else {
+        if (studentOptional.isPresent()){
             return ResponseEntity.ok().body(studentOptional.get());
+        } else {
+            return ResponseEntity.notFound().build();
         }
     }
 
     @PutMapping("/setWorking/{id}")
     public ResponseEntity<Student> updateWorking(@PathVariable Long id, @RequestParam(name = "working") boolean isWorking) {
         Optional<Student> studentOptional = studentService.updateWorking(id, isWorking);
-        if (studentOptional.isEmpty()){
-            return ResponseEntity.notFound().build();
-        } else {
+        if (studentOptional.isPresent()){
             return ResponseEntity.ok().body(studentOptional.get());
+        } else {
+            return ResponseEntity.notFound().build();
         }
     }
 
